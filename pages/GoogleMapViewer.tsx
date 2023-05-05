@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, Marker, LoadScript, useLoadScript, Polyline  } from '@react-google-maps/api';
 import Head from "next/head";
+import secrets from "@/secrets";
 
 const buhangin2jplaurel = [{ lng:
   125.66000536860685,
@@ -198,6 +199,7 @@ const buhangin2jplaurel = [{ lng:
   }
 
 const GoogleMapViewer: React.FC<{}> = () =>{
+  const apiKey = secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const [btn, setBtn] = useState(false);
   const [route, setRoute] = useState<Location[]>([{ lat: 0, lng: 0 }]);
 
@@ -223,7 +225,7 @@ useEffect(()=>{
       </Head>
         
 <div>
-      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY||"default"}>
+      <LoadScript googleMapsApiKey={apiKey}>
       <GoogleMap mapContainerStyle={mapStyles} zoom={13.7} center={defaultCenter}>
       {btn && <Polyline path={buhangin2jplaurel} options={{ strokeColor: "#FF55BB" }}  />}
       </GoogleMap>
